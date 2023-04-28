@@ -15,6 +15,7 @@ const Topbar = () => {
       "chopper",
       "franky",
       "brook",
+      "luffy"
     ];
     const random = Math.floor(Math.random() * logos.length);
     return (
