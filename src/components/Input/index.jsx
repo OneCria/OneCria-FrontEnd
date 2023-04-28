@@ -2,46 +2,75 @@ import React, { useState, useEffect, useMemo } from "react";
 import { InputBox } from "./style";
 
 export const CustomInput = ({ type, name, onclick, selectData }) => {
-  const [imagemPreview, setImagemPreview] = useState(null);
-  const inputType = useMemo(() => {
-    switch (type) {
-      case "select":
-        return (
-          <select name={name}>
-            {selectData.map((item) => (
-              <option value={item}>{item}</option>
-            ))}
-          </select>
-        );
-      case "text":
-        return <input name={name} type={type} onClick={onclick}></input>;
-      case "file":
-        return (
-          <>
-            <input
-              name={name}
-              type={type}
-              onChange={(e) => {
-                const file = e.target.files[0];
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                
-                setImagemPreview(file);
-              }}
-            ></input>
-            <img src={imagemPreview}></img>
-          </>
-        );
-      default:
-        break;
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagemPreview, setImagemPreview] = useState();
+
+  const handleImagePreview = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) {
+      return;
     }
-  }, [selectData]);
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      setSelectedImage(e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+  const inputTypes = {
+    select: ({ name, selectData }) => (
+      <select name={name}>
+        {selectData.map((item) => (
+          <option key={item} value={item}>
+            {item}
+          </option>
+        ))}
+      </select>
+    ),
+    text: ({ name, type, onclick }) => (
+      <input name={name} type={type} onClick={onclick} />
+    ),
+    file: ({ name, type, setImagemPreview, imagemPreview }) => (
+      <>
+        <label htmlFor="image-upload">
+          {selectedImage ? (
+            <img src={selectedImage} alt="Selected" />
+          ) : (
+            <img src="https://via.placeholder.com/200x200?text=Selecione+uma+imagem" />
+          )}
+        </label>
+        <input
+          id="image-upload"
+          type="file"
+          accept="image/*"
+          onChange={handleImagePreview}
+          style={{ display: "none" }}
+        />
+      </>
+    ),
+  };
+
+  const InputComponent = inputTypes[type];
+
+  if (!InputComponent) {
+    throw new Error(`Tipo de entrada "${type}" não suportado`);
+  }
 
   return (
     <InputBox>
       <label>{name}</label>
       <br />
-      {inputType}
+      <InputComponent
+        name={name}
+        selectData={selectData}
+        type={type}
+        onclick={onclick}
+        setImagemPreview={setImagemPreview}
+        imagemPreview={imagemPreview}
+      />
     </InputBox>
   );
 };
