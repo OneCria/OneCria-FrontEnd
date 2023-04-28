@@ -38,9 +38,9 @@ export const NewCharacter = () => {
         <CustomInput type={"text"} name={"nome"} />
         <CustomInput type={"select"} name={"Raça"} selectData={races} />
         <CustomInput type={"select"} name={"Classe"} selectData={classes} />
-        <CustomInput type={"select"} name={"Você é gay?"} selectData={['Sim','Sim']} />
+        <CustomInput type={"number"} name={"Nível"} />
       </div>
-
+    <button>Avançar</button>
     </Container>
   );
 };

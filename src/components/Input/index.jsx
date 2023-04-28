@@ -30,8 +30,8 @@ export const CustomInput = ({ type, name, onclick, selectData }) => {
         ))}
       </select>
     ),
-    text: ({ name, type, onclick }) => (
-      <input name={name} type={type} onClick={onclick} />
+    text: ({ name, type, onchange }) => (
+      <input name={name} type={type} onChange={onchange} />
     ),
     file: ({ name, type, setImagemPreview, imagemPreview }) => (
       <>
@@ -51,6 +51,9 @@ export const CustomInput = ({ type, name, onclick, selectData }) => {
         />
       </>
     ),
+    number:({name, type, onchange}) =>(
+      <input name={name} type={type} onChange={onchange} />
+    )
   };
 
   const InputComponent = inputTypes[type];
