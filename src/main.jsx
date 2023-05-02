@@ -5,6 +5,7 @@ import Index from './pages/Index'
 import { Moveset } from './pages/Moveset';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import { NewCharacter } from './pages/NewCharacter';
+import { Login } from './pages/login';
 
 //routes:
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/moveset",
         element: <Moveset/>
+      },
+      {
+        path: "/login",
+        element: <Login/>
       },
     ]
   }

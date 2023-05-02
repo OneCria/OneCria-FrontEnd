@@ -34,8 +34,9 @@ const Topbar = () => {
         <Nav
           dir={[
             { title: "Página inicial", link: "/" },
-            { title: "Novo Personagem", link: "/character" },
+            { title: "Novo Personagem", link: "character" },
             { title: "Moveset", link: "moveset" },
+            { title: "Login", link: "login" },
           ]}
         />
       </div>

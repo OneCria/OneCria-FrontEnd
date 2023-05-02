@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "./style";
 import { CustomInput } from "../../components/Input";
-import classes from "dom/lib/classes";
 
 export const NewCharacter = () => {
+  const [nome, setNome] = useState();
+  const [nivel, setNivel] = useState();
+  
   const races = [
     "Anão",
     "Celestiai",
@@ -28,6 +30,10 @@ export const NewCharacter = () => {
     "Usuário de Rokushiki",
   ];
 
+  const validate = () =>{
+    console.log(nome, nivel)
+  }
+
   return (
     <Container>
       <h2>Crie seu personagem</h2>
@@ -35,12 +41,12 @@ export const NewCharacter = () => {
         <CustomInput type={"file"} name={"token"} />
       </div>
       <div className="inputContainer">
-        <CustomInput type={"text"} name={"nome"} />
+        <CustomInput type={"text"} name={"nome"} onChange={()=>{console.log('e')}}/>
         <CustomInput type={"select"} name={"Raça"} selectData={races} />
         <CustomInput type={"select"} name={"Classe"} selectData={classes} />
         <CustomInput type={"number"} name={"Nível"} />
       </div>
-    <button>Avançar</button>
+    <button onClick={validate}>Avançar</button>
     </Container>
   );
 };
