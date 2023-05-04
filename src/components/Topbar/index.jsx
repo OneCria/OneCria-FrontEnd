@@ -5,6 +5,14 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Topbar = () => {
   const navigate = useNavigate;
+  const [User, setUser] = useState();
+
+  useEffect(() => {
+    let login = JSON.parse(localStorage.getItem("UserLogged"));
+    try {
+      setUser(login);
+    } catch (error) {}
+  }, []);
   const logo = useMemo(() => {
     const logos = [
       "zoro",
@@ -15,7 +23,7 @@ const Topbar = () => {
       "chopper",
       "franky",
       "brook",
-      "luffy"
+      "luffy",
     ];
     const random = Math.floor(Math.random() * logos.length);
     return (
@@ -36,7 +44,9 @@ const Topbar = () => {
             { title: "Página inicial", link: "/" },
             { title: "Novo Personagem", link: "character" },
             { title: "Moveset", link: "moveset" },
-            { title: "Login", link: "login" },
+            User
+              ? { title: User, link: "profile" }
+              : { title: "Login", link: "login" },
           ]}
         />
       </div>
