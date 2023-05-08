@@ -44,20 +44,22 @@ export const CustomInput = ({
       );
     case "select":
       return (
-        <select name={name} onChange={onChange}>
-          {selectData.map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
+        <InputBox>
+          <label>{name}</label>
+          <select name={name} onChange={onChange}>
+            {selectData&&selectData.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </InputBox>
       );
   }
   return (
     <InputBox>
       <label>{name}</label>
-      <br />
-      <Input
+      <input
         name={name}
         selectData={selectData}
         type={type}

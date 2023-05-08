@@ -11,23 +11,8 @@ export const Login = () => {
   const [User, setUser] = useState();
   const [Pass, setPass] = useState();
   const [confirmPass, setconfirmPass] = useState();
-  const navigate = useNavigate();
-  const Logar = async () => {
-    const data = {
-      name: User,
-      password: Pass,
-    };
-    try {
-      const response = await axios.get(`http://localhost:3001/users`)
-        if(response.data.users.find(e => e.name == data.name && e.password == data.password)){
-          localStorage.setItem("UserLogged", JSON.stringify(data.name))
-          navigate('/')
-        }
-    } catch (error) {
-      alert("Erro ao carregar a página");
-    }
-  };
   const Cadastrar = async () => {
+
       const data = {
         name: User,
         password: Pass,

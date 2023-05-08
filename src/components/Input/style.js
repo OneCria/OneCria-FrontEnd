@@ -3,6 +3,10 @@ import theme from "../../styles/theme";
 
 export const InputBox = styled.div`
   padding: 5px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   
   label{
     font-weight: ${theme.font.semiBold};

@@ -1,38 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Container } from "./style";
 import { CustomInput } from "../../components/Input";
+import axios from "axios";
 
 export const NewCharacter = () => {
-  const [nome, setNome] = useState();
-  const [nivel, setNivel] = useState();
-  
-  const races = [
-    "Anão",
-    "Celestiai",
-    "Gigante",
-    "Homem-Peixe",
-    "Humano",
-    "Kuja",
-    "Lunariano",
-    "Meio Homem-Peixe",
-    "Mink",
-    "Sireno",
-  ];
-  const classes = [
-    "Atirador",
-    "Carateca Homem-Peixe",
-    "Ciborgue",
-    "Guerreiro-Oni",
-    "Guerrilheiro",
-    "Lutador",
-    "Ninja",
-    "Okama Kenpo",
-    "Usuário de Rokushiki",
-  ];
+  const [Name, setName] = useState();
+  const [Level, setLevel] = useState();
+  const [Career, setCareer] = useState();
+  const [Race, setRace] = useState();
+  const [Class, setClass] = useState();
+  const [Life, setLife] = useState();
 
-  const validate = () =>{
-    console.log(nome, nivel)
-  }
+  const [CharactersOptions, setCharactersOptions] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/characters/options`)
+      .then((response) => setCharactersOptions(response.data));
+  }, []);
+
+  const validate = () => {
+    const data = {
+      race: Race,
+      class: Class,
+      career: Career,
+      life: Life,
+      level: Level,
+      name: Name,
+      user_id: 2 // MUDAR PARA PARÂMETRO DO USUÁRIO
+    }
+    axios
+    .post(`http://localhost:3001/characters`, data)
+  };
 
   return (
     <Container>
@@ -41,12 +40,53 @@ export const NewCharacter = () => {
         <CustomInput type={"file"} name={"token"} />
       </div>
       <div className="inputContainer">
-        <CustomInput type={"text"} name={"nome"} onChange={()=>{console.log('e')}}/>
-        <CustomInput type={"select"} name={"Raça"} selectData={races} />
-        <CustomInput type={"select"} name={"Classe"} selectData={classes} />
-        <CustomInput type={"number"} name={"Nível"} />
+        <CustomInput
+          type={"text"}
+          name={"nome"}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        />
+        <CustomInput
+          type={"select"}
+          name={"Raça"}
+          selectData={CharactersOptions.races}
+          onChange={(e) => {
+            setRace(e.target.value);
+          }}
+        />
+        <CustomInput
+          type={"select"}
+          name={"Classe"}
+          selectData={CharactersOptions.classes}
+          onChange={(e) => {
+            setClass(e.target.value);
+          }}
+        />
+        <CustomInput
+          type={"select"}
+          name={"Profissão"}
+          selectData={CharactersOptions.careers}
+          onChange={(e) => {
+            setCareer(e.target.value);
+          }}
+        />
+        <CustomInput
+          type={"number"}
+          name={"Nível"}
+          onChange={(e) => {
+            setLevel(e.target.value);
+          }}
+        />
+        <CustomInput
+          type={"number"}
+          name={"Vida Máxima"}
+          onChange={(e) => {
+            setLife(e.target.value);
+          }}
+        />
       </div>
-    <button onClick={validate}>Avançar</button>
+      <button onClick={validate}>Criar</button>
     </Container>
   );
 };

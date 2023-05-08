@@ -4,15 +4,6 @@ import Nav from "./Nav";
 import { useNavigate, Link } from "react-router-dom";
 
 const Topbar = () => {
-  const navigate = useNavigate;
-  const [User, setUser] = useState();
-
-  useEffect(() => {
-    let login = JSON.parse(localStorage.getItem("UserLogged"));
-    try {
-      setUser(login);
-    } catch (error) {}
-  }, []);
   const logo = useMemo(() => {
     const logos = [
       "zoro",
@@ -43,10 +34,7 @@ const Topbar = () => {
           dir={[
             { title: "Página inicial", link: "/" },
             { title: "Novo Personagem", link: "character" },
-            { title: "Moveset", link: "moveset" },
-            User
-              ? { title: User, link: "profile" }
-              : { title: "Login", link: "login" },
+            { title: "Seus personagens", link: "characters" }
           ]}
         />
       </div>

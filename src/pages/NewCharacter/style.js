@@ -10,6 +10,7 @@ export const Container = styled.div`
   .inputContainer {
     display: inline-grid;
     grid-template-columns: 1fr 1fr;
+
   }
   button{
     background: ${theme.colors.primaryDark};
