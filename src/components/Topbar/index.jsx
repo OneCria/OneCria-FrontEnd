@@ -34,7 +34,8 @@ const Topbar = () => {
           dir={[
             { title: "Página inicial", link: "/" },
             { title: "Novo Personagem", link: "character" },
-            { title: "Seus personagens", link: "characters" }
+            { title: "Seus personagens", link: "characters" },
+            { title: "Login", link: "login" }
           ]}
         />
       </div>
