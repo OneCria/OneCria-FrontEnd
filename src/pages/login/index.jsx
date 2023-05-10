@@ -3,6 +3,7 @@ import { Container, Card } from "./style";
 import { CustomInput } from "../../components/Input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const Login = () => {
   const [ToggleCard, setToggleCard] = useState(false);
@@ -11,21 +12,40 @@ export const Login = () => {
   const [User, setUser] = useState();
   const [Pass, setPass] = useState();
   const [confirmPass, setconfirmPass] = useState();
-  const Cadastrar = async () => {
+  const [Email, setEmail] = useState();
 
-      const data = {
-        name: User,
-        password: Pass,
-      };
+  const Cadastrar = async () => {
+    if (User && Pass && confirmPass) {
       try {
-        await axios.post(`http://localhost:3001/users`, data)
-        .then((response)=>{
-          window.location.reload();
-        })
+        await axios
+          .post(`http://localhost:3001/users`, {
+            name: User,
+            password: Pass,
+            email: Email
+          })
+          .then((response) => {
+            Swal.fire({
+              title: "Usuário cadastrado com sucesso!",
+              icon: "success",
+              timer: 1200,
+            });
+          });
       } catch (error) {
-        alert("Erro ao carregar a página");
+        Swal.fire({
+          title: "Usuário ou senha inválido",
+          icon: "error",
+          timer: 1200,
+        });
       }
+    } else {
+      Swal.fire({
+        title: "Preencha todos os campos",
+        icon: "error",
+        timer: 1200,
+      });
+    }
   };
+  const Logar = () => {};
   return (
     <Container>
       <Card>
@@ -37,6 +57,15 @@ export const Login = () => {
             setUser(e.target.value);
           }}
         />
+        {action != "Logar" ? (
+          <CustomInput
+          type="text"
+          name="e-mail"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        ):""}
         <CustomInput
           type="password"
           name="Senha"
@@ -49,7 +78,9 @@ export const Login = () => {
             type="password"
             name="Confirmar Senha"
             onChange={(e) => {
-              setconfirmPass(e.target.value);
+              if(e.target.value == Pass){
+                setconfirmPass(e.target.value);
+              }
             }}
           />
         ) : (

@@ -9,6 +9,7 @@ export const CustomInput = ({
   selectData,
   setImagemPreview,
   imagemPreview,
+  valid
 }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const handleImagePreview = (e) => {
@@ -47,11 +48,13 @@ export const CustomInput = ({
         <InputBox>
           <label>{name}</label>
           <select name={name} onChange={onChange}>
-            {selectData&&selectData.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
+          <option selected disabled>Selecione sua {name}</option>
+            {selectData &&
+              selectData.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
           </select>
         </InputBox>
       );
