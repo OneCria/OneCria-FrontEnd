@@ -22,10 +22,4 @@ export const InputBox = styled.div`
     width:16.5rem;
     padding: 0.4rem;
   }
-  img{
-    width: 200px;
-    height: 200px;
-    border-radius:50%;
-    border: 1px solid #000000;
-  }
 `;

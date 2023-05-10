@@ -10,6 +10,7 @@ export const NewCharacter = () => {
   const [Race, setRace] = useState();
   const [Class, setClass] = useState();
   const [Life, setLife] = useState();
+  const [Token, setToken] = useState(null);
 
   const [CharactersOptions, setCharactersOptions] = useState([]);
 
@@ -20,7 +21,9 @@ export const NewCharacter = () => {
   }, []);
 
   const validate = () => {
-    const data = {
+    console.log()
+     axios
+    .post(`http://localhost:3001/characters`, {
       race: Race,
       class: Class,
       career: Career,
@@ -28,17 +31,14 @@ export const NewCharacter = () => {
       level: Level,
       name: Name,
       user_id: 2 // MUDAR PARA PARÂMETRO DO USUÁRIO
-    }
-    axios
-    .post(`http://localhost:3001/characters`, data)
+    }) 
+    axios.post(`src/media/tokens`, Token)
   };
 
   return (
     <Container>
       <h2>Crie seu personagem</h2>
-      <div className="photoContainer">
-        <CustomInput type={"file"} name={"token"} />
-      </div>
+        <CustomInput type={"file"} name={"token"} onSelectImage={(imagem)=>{setToken(imagem)}}/>
       <div className="inputContainer">
         <CustomInput
           type={"text"}

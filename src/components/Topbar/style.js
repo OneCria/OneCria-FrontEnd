@@ -38,4 +38,11 @@ export const Topo = styled.div`
     text-decoration:none;
     color:white;
   }
+
+  div:nth-child(3){
+    position: absolute;
+    right: 2rem;
+    cursor:pointer;
+    text-align:center;  
+  }
 `

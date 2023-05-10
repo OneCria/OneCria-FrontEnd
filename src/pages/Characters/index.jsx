@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext, useEffect } from "react";
 import { Container } from "./style";
 import { CharBackgrounds } from "../../utils/utils";
 import axios from "axios";
@@ -9,12 +9,18 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
+import UserContext from "../../contexts/user.context";
 
 export function Characters() {
-  const [characters, setCharacters] = useState([]);
+  const {UserLogged} = useContext(UserContext)
+  const [ID, setID] = useState(UserLogged.id);
+  useEffect(() => {
+    setID(UserLogged.id);
+  }, [UserLogged.id]);
 
+  const [characters, setCharacters] = useState([]);
   const fetchDados = async () => {
-    const response = await axios.get(`http://localhost:3001/characters?user=2`);
+    const response = await axios.get(`http://localhost:3001/characters?user=${ID}`);
     return response.data;
   };
 

@@ -215,7 +215,7 @@ export const Container = styled.div`
   }
   .Rokushiki {
     color: black;
-    text-shadow: 2px 1px black;
+    text-shadow: 2px 1px white;
 
     p:nth-child(3),
     p:nth-child(6),

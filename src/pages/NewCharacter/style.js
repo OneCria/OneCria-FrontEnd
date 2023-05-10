@@ -26,4 +26,10 @@ export const Container = styled.div`
   button:hover{
     opacity: 1;
   }
+  img{
+    width: 220px;
+    height:220px;
+    border-radius:50%;
+    border: 1px solid #000000;
+  }
 `;

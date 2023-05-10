@@ -5,7 +5,7 @@ const Nav = ({ dir }) => {
   const Links = useMemo(
     () =>
       dir.map((link) => {
-        return <li><Link to={`${link.link}`}>{link.title}</Link></li>;
+        return <li><Link to={`${link?.link}`}>{link?.title}</Link></li>;
       }),
     [dir]
   );

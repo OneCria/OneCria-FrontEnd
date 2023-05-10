@@ -9,9 +9,10 @@ export const CustomInput = ({
   selectData,
   setImagemPreview,
   imagemPreview,
-  valid
+  onSelectImage 
 }) => {
   const [selectedImage, setSelectedImage] = useState(null);
+  
   const handleImagePreview = (e) => {
     const file = e.target.files[0];
     if (!file) {
@@ -20,9 +21,12 @@ export const CustomInput = ({
     const reader = new FileReader();
     reader.onload = (e) => {
       setSelectedImage(e.target.result);
+      // Chama a função de retorno com o valor de selectedImage
+      onSelectImage(e.target.result);
     };
     reader.readAsDataURL(file);
   };
+
   switch (type) {
     case "file":
       return (

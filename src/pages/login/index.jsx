@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Card } from "./style";
 import { CustomInput } from "../../components/Input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import jwt from 'jwt-decode'
+import UserContext from "../../contexts/user.context";
 
 export const Login = () => {
   const [ToggleCard, setToggleCard] = useState(false);
@@ -12,23 +14,27 @@ export const Login = () => {
   const [User, setUser] = useState();
   const [Pass, setPass] = useState();
   const [confirmPass, setconfirmPass] = useState();
-  const [Email, setEmail] = useState();
+  const { UserLogged, setUserLogged } = useContext(UserContext);
 
+  const navigate = useNavigate();
   const Cadastrar = async () => {
     if (User && Pass && confirmPass) {
       try {
         await axios
           .post(`http://localhost:3001/users`, {
             name: User,
-            password: Pass,
-            email: Email
+            password: Pass
           })
           .then((response) => {
             Swal.fire({
               title: "Usuário cadastrado com sucesso!",
               icon: "success",
               timer: 1200,
-            });
+            }),
+            
+              setTimeout(() => {
+                location.reload();
+              }, 1200);
           });
       } catch (error) {
         Swal.fire({
@@ -45,7 +51,38 @@ export const Login = () => {
       });
     }
   };
-  const Logar = () => {};
+  const Logar = () => {
+    if (User && Pass) {
+      try {
+        axios
+          .post(`http://localhost:3001/login`, {
+            username: User,
+            password: Pass,
+          })
+          .then((res) => {
+            const user = jwt(res.data.access_token)
+            console.log(user)
+            localStorage.setItem("user", User)
+            localStorage.setItem("id", user.sub)
+              Swal.fire({
+                title: "Logado com sucesso",
+                icon: "success",
+                timer: 1200,
+              });
+              setUserLogged({ name: User });
+             setTimeout(() => {
+              navigate("/");
+            }, 1200);
+          });
+      } catch (error) {
+        Swal.fire({
+          title: "Usuário ou senha inválido",
+          icon: "error",
+          timer: 1200,
+        });
+      }
+    }
+  };
   return (
     <Container>
       <Card>
@@ -57,15 +94,6 @@ export const Login = () => {
             setUser(e.target.value);
           }}
         />
-        {action != "Logar" ? (
-          <CustomInput
-          type="text"
-          name="e-mail"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        ):""}
         <CustomInput
           type="password"
           name="Senha"
@@ -78,7 +106,7 @@ export const Login = () => {
             type="password"
             name="Confirmar Senha"
             onChange={(e) => {
-              if(e.target.value == Pass){
+              if (e.target.value == Pass) {
                 setconfirmPass(e.target.value);
               }
             }}

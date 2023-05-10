@@ -1,9 +1,18 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import * as S from "./style";
 import Nav from "./Nav";
 import { useNavigate, Link } from "react-router-dom";
+import UserContext from "../../contexts/user.context";
 
 const Topbar = () => {
+  const { UserLogged, setUserLogged } = useContext(UserContext);
+  const [User, setUser] = useState(UserLogged.name);
+  const [ID, setID] = useState(UserLogged.id);
+  useEffect(() => {
+    setUser(UserLogged.name);
+    setID(UserLogged.id);
+  }, [UserLogged.name]);
+  const navigate = useNavigate();
   const logo = useMemo(() => {
     const logos = [
       "zoro",
@@ -29,16 +38,39 @@ const Topbar = () => {
   return (
     <S.Topo>
       <div>{logo}</div>
-      <div>
-        <Nav
-          dir={[
-            { title: "Página inicial", link: "/" },
-            { title: "Novo Personagem", link: "character" },
-            { title: "Seus personagens", link: "characters" },
-            { title: "Login", link: "login" }
-          ]}
-        />
-      </div>
+      {User ? (
+        <>
+          <div>
+            <Nav
+              dir={[
+                { title: "Página Inicial", link: "/" },
+                { title: "Novo Personagem", link: "character" },
+                { title: "Seus personagens", link: "characters" },
+              ]}
+            />
+          </div>
+          <div
+            onClick={() => {
+              navigate('/')
+              setUserLogged("");
+              localStorage.removeItem("user");
+              localStorage.removeItem("id");
+            }}
+          >
+            Olá, {User}
+            <br /> Logout
+          </div>
+        </>
+      ) : (
+        <div>
+          <Nav
+            dir={[
+              { title: "Página Inicial", link: "/" },
+              { title: "Login", link: "login" },
+            ]}
+          />
+        </div>
+      )}
     </S.Topo>
   );
 };
