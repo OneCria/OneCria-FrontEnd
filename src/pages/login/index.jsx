@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Card } from "./style";
+import { Container, Card, BoxLeft } from "./style";
 import { CustomInput } from "../../components/Input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -74,51 +74,39 @@ export const Login = () => {
   return (
     <Container>
       <Card>
-        <h1>{action}</h1>
-        <CustomInput
-          name="Usuario"
-          type="text"
-          onChange={(e) => {
-            setUser(e.target.value);
-            e.preventDefault()
-          }}
-          
-          
-        />
-        <CustomInput
-          type="password"
-          name="Senha"
-          onChange={(e) => {
-            setPass(e.target.value);
-            e.preventDefault()
-          }}
-        />
-        {action != "Logar" ? (
-          <CustomInput
-            type="password"
-            name="Confirmar Senha"
-            onChange={(e) => {
-              if (e.target.value == Pass) {
-                setconfirmPass(e.target.value);
-              }
-              e.preventDefault()
-            }}
-          />
-        ) : (
-          ""
-        )}
-        <button onClick={action == "Logar" ? Logar : Cadastrar}>
-          {action}
-        </button>
-        <p>{action == "Logar" ? "Já tem uma conta?" : "Não tem uma conta?"}</p>
-        <p
-          id="action"
-          onClick={() => {
-            setToggleCard(!ToggleCard);
-          }}
-        >
-          {action == "Logar" ? "Cadastre-se" : "Entrar"}
-        </p>
+        {/* ESQUERDA */}
+        <BoxLeft>
+          <div>
+            <div>
+              <label htmlFor="Usuario">Nome de Usuário</label>
+              <input
+                name="Usuario"
+                placeholder="Nome de Usuário"
+                onChange={(e) => {
+                  setUser(e.target.value);
+                  e.preventDefault();
+                }}
+              />
+            </div>
+            <div>
+              <label htmlFor="Senha">Senha</label>
+              <input
+                type="password"
+                name="Senha"
+                placeholder="Senha"
+                onChange={(e) => {
+                  setPass(e.target.value);
+                  e.preventDefault();
+                }}
+              />
+            </div>
+            <button onClick={Logar}> Entrar</button>
+          </div>
+        </BoxLeft>
+        {/* DIREITA */}
+        <div>
+          <img src="src/media/login.png" alt="" />
+        </div>
       </Card>
     </Container>
   );
