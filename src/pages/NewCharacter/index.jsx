@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Container } from "./style";
 import { CustomInput } from "../../components/Input";
 import axios from "axios";
+import { CharCard } from "../../components/List-char-card";
 
 export const NewCharacter = () => {
   const [Name, setName] = useState();
@@ -21,7 +22,6 @@ export const NewCharacter = () => {
   }, []);
 
   const validate = () => {
-    console.log()
      axios
     .post(`http://localhost:3001/characters`, {
       race: Race,
@@ -37,6 +37,12 @@ export const NewCharacter = () => {
 
   return (
     <Container>
+      <CharCard />
+    </Container>
+    
+  );
+};
+{/* <Container>
       <h2>Crie seu personagem</h2>
         <CustomInput type={"file"} name={"token"} onSelectImage={(imagem)=>{setToken(imagem)}}/>
       <div className="inputContainer">
@@ -87,6 +93,4 @@ export const NewCharacter = () => {
         />
       </div>
       <button onClick={validate}>Criar</button>
-    </Container>
-  );
-};
+    </Container> */}

@@ -30,7 +30,7 @@ const Topbar = () => {
       <>
         <Link to={`/`}>
           {" "}
-          <img src={"src/media/icons/" + logos[random] + ".png"}></img> One Cria
+          <img src={"src/media/icons/" + logos[random] + ".png"}></img>
         </Link>
       </>
     );

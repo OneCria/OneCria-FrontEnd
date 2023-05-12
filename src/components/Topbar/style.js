@@ -4,12 +4,12 @@ import theme from '../../styles/theme'
 export const Topo = styled.div`
   width: 100%;
   display: flex;
-  background: ${theme.colors.navDark};
+  background: ${theme.colors.white};
   height: 4rem;
-  color: ${theme.colors.white};
   align-items: center;
   padding: 0 2rem;
   gap: 1rem;
+  box-shadow: 1px 1px 6px 1px #00000050;
 
   ul{
     list-style: none;
@@ -18,25 +18,23 @@ export const Topo = styled.div`
     width: 100%;    
   }
   div:nth-child(1), div:nth-child(1) a{
-    border-radius: 50%;
     width: 100px;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content:flex-end;
-    background: ${theme.colors.primaryDark};
     text-decoration:none;
     color: white;
   }
   div:nth-child(1) img{
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
   }
 
   a{
-    font-weight: ${theme.font.regular};
+    font-weight: ${theme.font.semiBold};
     text-decoration:none;
-    color:white;
+    color: black;
   }
 
   div:nth-child(3){
