@@ -2,10 +2,10 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 export const Container = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items:center;
-  height: calc(100vh - 10rem);
+  height: calc(100vh - 10rem); */
   `
 ;
 
@@ -17,8 +17,8 @@ export const Card = styled.div`
   background: #fff5d7;
   border: 1px solid #000000;
   border-radius: 16px;
-  box-shadow: 0 3px 3px #1313133a;
-  animation: fadeMove .6s ease-in-out;
+  //box-shadow: 0 3px 3px #1313133a;
+  /* animation: fadeMove .6s ease-in-out;
  
   @keyframes fadeMove {
     from {
@@ -28,7 +28,7 @@ export const Card = styled.div`
       opacity: 1;
       transform: translate3d(0, 0, 0);
     }
-  }
+  } */
   div {
     display: flex;
     flex-direction: column;
@@ -47,7 +47,7 @@ export const Card = styled.div`
     border-left: 1px solid #131313;
   }
 
-  @media screen and (max-width: 768px) {
+  /* @media screen and (max-width: 768px) {
     width: 45rem;
     height: 30rem;
   }
@@ -55,14 +55,14 @@ export const Card = styled.div`
   @media screen and (min-width: 1024px) {
     width: 60rem;
     height: 40rem;
-  }
+  } */
   `
 ;
 export const BoxLeft = styled.div`
   justify-content:center;
   padding-left: 3rem;
 
-  input{
+  /* input{
     border-radius: 8px;
     width: 100%;
     margin: 0 auto;
@@ -75,13 +75,13 @@ export const BoxLeft = styled.div`
     ::placeholder {
       font-weight: bold;
     }
-  }
+  } */
 
-  label{
+  /* label{
     text-align: start;
     font-weight:bold;
     font-size: 1.2rem;
-  }
+  } */
 
   button {
     font-size: 1.1rem;

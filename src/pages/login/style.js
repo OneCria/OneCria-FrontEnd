@@ -3,63 +3,117 @@ import theme from "../../styles/theme";
 
 // Configurações do Card e suas imagens
 const SignCardProps = {
-  height: `${450}px`,
-  width: `${750}px`,
+  "1024px": {
+    height: `${40}rem`, // Card container
+    width: `${60}rem`, // Card container
+    imgHeight: `${39.9}rem`, //Imagem
+  },
+  "768px": {
+    height: `${45}rem`,
+    imgHeight: `${44.9}rem`,
+    width: `${30}rem`,
+  },
   background: `#fff5d7`,
-  borderRadius: `${52}px`
-}
+  borderRadius: `${16}px`,
+};
 
 export const Container = styled.div`
-  padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 65vh;
-  width: 100%;
-  overflow: hidden;
+  height: calc(100vh - 10rem);
 `;
 
 export const Card = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   border: 1px solid #000000;
+  box-shadow: 0 3px 3px #1313133a;
+  animation: fadeMove 0.6s ease-in-out;
 
-  width: ${SignCardProps.width};
-  height: ${SignCardProps.height};
   background: ${SignCardProps.background};
   border-radius: ${SignCardProps.borderRadius};
 
+  @media screen and (max-width: 768px) {
+    width:${SignCardProps["768px"].width};
+    height: ${SignCardProps["768px"].height};
+
+    img{
+      height: ${SignCardProps["768px"].imgHeight};
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: ${SignCardProps["1024px"].width};
+    height: ${SignCardProps["1024px"].height};
+
+    img{
+      height: ${SignCardProps["1024px"].imgHeight};
+    }
+  }
+
   img {
     width: 100%;
-    height:${SignCardProps.height};
   }
 
   input {
-    border-radius: 10px;
-    width: 16rem;
-    padding: 12px;
-    background-color: #fff;
-    border: 1px solid #000;
+    border-radius: 8px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 12px 0;
+    padding-left: 1rem;
+    background-color: #fefefe;
+    border: 1px solid #131313;
+    font-size: 1.2rem;
+
+    ::placeholder {
+      font-weight: bold;
+    }
   }
   label {
-    font-weight: bolder;
+    text-align: start;
+    font-weight: bold;
+    font-size: 1.2rem;
   }
+
   button {
-    width: 6rem;
-    height: 2rem;
-    background: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    max-width: 14rem;
+    width: 10rem;
+    height: 3rem;
     border-radius: 5px;
-    border: 1px solid #000000;
+    border: 1px solid #131313;
+    background-color: #fede80;
     cursor: pointer;
     margin-top: 15px;
+    transition: all 0.5s ease-in-out;
+
+    :hover {
+      box-shadow: 0 1px 5px #1313136c;
+      background-color: #ffd556;
+    }
   }
+
   #Signup {
     border: 0;
     background: transparent;
     width: 3rem;
-
-    :hover{
+    margin-left: 10px;
+    :hover {
       text-decoration: underline;
+      box-shadow: none;
+    }
+  }
+
+  @keyframes fadeMove {
+    from {
+      opacity: 0;
+      transform: translate3d(-30px, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
     }
   }
 `;
@@ -68,7 +122,8 @@ export const BoxLeft = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
+
   div {
     display: flex;
     flex-direction: column;
@@ -83,7 +138,7 @@ export const BoxRight = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   div {
     display: flex;
     flex-direction: column;
