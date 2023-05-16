@@ -2,6 +2,19 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 import { CharBackgrounds } from "../../utils/utils";
 export const Container = styled.div`
+  
+  animation: fadeMove 0.6s ease-in-out;
+  @keyframes fadeMove {
+    from {
+      opacity: 0;
+      transform: translate3d(-30px, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
   .Atirador {
     background-color: ${CharBackgrounds.Atirador.primary};
 
@@ -75,7 +88,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Card = styled.div`
+/* export const Card = styled.div`
   height: 100%;
   color: black;
   font-weight: bold;
@@ -116,4 +129,74 @@ export const Card = styled.div`
       }
   }
   
+`;
+ */
+
+const SignCardProps = {
+  "1024px": {
+    height: `${40}rem`, // Card container
+    width: `${60}rem`, // Card container
+    imgHeight: `${39.9}rem`, //Imagem
+  },
+  "768px": {
+    height: `${45}rem`,
+    imgHeight: `${44.9}rem`,
+    width: `${30}rem`,
+  },
+  background: `#fff5d7`,
+  borderRadius: `${16}px`,
+};
+
+export const Card = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: 0 3px 3px #1313133a;
+  border-radius: 15px;
+  height: 100%;
+
+  img {
+    width: 100%;
+  }
+
+  button {
+    font-size: 1.1rem;
+    font-weight: bold;
+    max-width: 14rem;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 5px;
+    border: 1px solid #131313;
+    background-color: #fede80;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
+    :hover {
+      box-shadow: 0 1px 5px #1313136c;
+      background-color: #ffd556;
+    }
+  }
+  
+`;
+
+export const BoxLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  img {
+    border-top-left-radius: ${SignCardProps.borderRadius};
+    border-bottom-left-radius: ${SignCardProps.borderRadius};
+  }
+`;
+export const BoxRight = styled.div`
+  img {
+    border-top-right-radius: ${SignCardProps.borderRadius};
+    border-bottom-right-radius: ${SignCardProps.borderRadius};
+  }
 `;

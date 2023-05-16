@@ -42,7 +42,8 @@ export const CharCard = () => {
                 <button>Selecionar classe</button>
               </div>
               <div>
-                <img src={`src/media/char icons/${item.name}.png`} alt="" /></div> 
+                <img src={`src/media/char icons/${item.name}.png`} alt="" />
+              </div> 
             </Card>
           ))}
         </StackedCarousel>

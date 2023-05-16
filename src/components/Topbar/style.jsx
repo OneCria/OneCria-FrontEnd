@@ -14,8 +14,9 @@ export const Topo = styled.div`
   ul{
     list-style: none;
     display: flex;
-    justify-content: space-between;
     width: 100%;    
+    justify-content: space-evenly;
+    gap: 1rem;
   }
   div:nth-child(1), div:nth-child(1) a{
     width: 100px;
