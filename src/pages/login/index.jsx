@@ -78,29 +78,33 @@ export const Login = () => {
         <BoxLeft>
           <div>
             <div>
-              <label htmlFor="Usuario">Nome de Usuário</label>
-              <input
+              <label htmlFor="Usuario">
+                Nome de Usuário
+                <input
                 name="Usuario"
-                placeholder="Nome de Usuário"
+                placeholder="Ex: Monkey D. Luffy"
                 onChange={(e) => {
                   setUser(e.target.value);
                   e.preventDefault();
                 }}
               />
+                </label>
             </div>
             <div>
-              <label htmlFor="Senha">Senha</label>
-              <input
+              <label htmlFor="Senha">
+                Senha
+                <input
                 type="password"
                 name="Senha"
-                placeholder="Senha"
+                placeholder="Ex: S3nH4@"
                 onChange={(e) => {
                   setPass(e.target.value);
                   e.preventDefault();
                 }}
               />
+                </label>
             </div>
-            <button onClick={Logar}> Entrar</button>
+            <button onClick={Logar}>Entrar</button>
           </div>
         </BoxLeft>
         {/* DIREITA */}
