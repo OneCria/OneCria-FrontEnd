@@ -17,8 +17,18 @@ export const Card = styled.div`
   background: #fff5d7;
   border: 1px solid #000000;
   border-radius: 16px;
-  position:relative;
+  box-shadow: 0 3px 3px #1313133a;
+  animation: fadeMove .6s ease-in-out;
  
+  @keyframes fadeMove {
+    from {
+      opacity: 0;
+      transform: translate3d(-30px, 0, 0);
+    } to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
   div {
     display: flex;
     flex-direction: column;
@@ -76,7 +86,7 @@ export const BoxLeft = styled.div`
     font-size: 1.1rem;
     font-weight: bold;
     max-width: 14rem;
-    width:10rem;
+    width: 10rem;
     height: 3rem;
     border-radius:5px;
     border: 1px solid #131313;
